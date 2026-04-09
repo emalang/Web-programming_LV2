@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Grafikon</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header>
+            <h1>Grafički prikaz filmova</h1>
+        </header> 
+        
+        <div class="nav-wrapper">
+			<nav aria-labelledby="Main navigation"> <!-- dodati obilježja za ARIA-->
+				<ul> <!-- dodati da je navigacija lijevo poravnata i da je skrivena
+									
+					LV1: bez upotrebe javascripta -->
+					<li><a href="index.html">Početna</a></li>
+					<li><a href="grafikon.html">Grafikoni</a></li>
+					<li><a href="slike.html">Galerija</a></li>
+				</ul>
+			</nav>
+		</div>
+
+        <main class="content">
+            <h2>Raspodjela filmova po žanrovima</h2>
+
+            <div class="chart-wrapper">
+                <figure>
+                    <div class="pie-visual"></div>
+                    <figcaption>
+                          <ul class="pie-chart">
+                            <li><span style="color:#3498db;">■</span> Drama (5)</li>
+                            <li><span style="color:#2ecc71;">■</span> Komedija (5)</li>
+                            <li><span style="color:#f1c40f;">■</span> Akcija (2)</li>
+                            <li><span style="color:#e74c3c;">■</span> Ostalo (7)</li>
+                        </ul>
+                    </figcaption>
+                </figure>
+            </div>
+        </main>
+    </body>
+</html>
