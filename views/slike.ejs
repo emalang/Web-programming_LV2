@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galerija</title>
+
+    <link rel="stylesheet" href="/styles/style.css">
+    <link rel="stylesheet" href="/styles/style_slike.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="header-inner">
+            <h1>Aktualni filmovi</h1>
+        </div>
+    </header>
+
+    <div class="nav-wrapper">
+			<nav aria-label="Main navigation"> <!-- dodati obilježja za ARIA-->
+				<ul> <!-- dodati da je navigacija lijevo poravnata i da je skrivena
+                
+					LV1: bez upotrebe javascripta -->
+					<li><a href="/">Početna</a></li>
+					<li><a href="/grafikon">Grafikoni</a></li>
+					<li><a href="/slike">Galerija</a></li>
+				</ul>
+			</nav>
+		</div>
+		
+
+    <main class="gallery-main">
+        <h2>Galerija filmova</h2>
+
+        <section class="galerija">
+            <% images.forEach(image => { %>
+                <figure class="galerija_slika">
+                    <a href="#<%= image.id %>">
+                        <img 
+                            src="<%= image.url %>" 
+                            alt="<%= image.title %>"
+                            loading="lazy"
+                        >
+                    </a>
+
+                    <figcaption class="movie-title">
+                        <%= image.title %>
+                    </figcaption>
+                </figure>
+            <% }) %>
+        </section>
+
+        <% images.forEach(image => { %>
+            <div id="<%= image.id %>" class="lightbox">
+                <a href="#" class="lightbox-overlay"></a>
+
+                <div class="lightbox-content">
+                    <a href="#" class="close">Zatvori ×</a>
+
+                    <img 
+                        src="<%= image.url %>" 
+                        alt="<%= image.title %>"
+                    >
+                </div>
+            </div>
+        <% }) %>
+    </main>
+
+    <footer class="site-footer">
+        <p>Aktualni filmovi — Filmska galerija</p>
+    </footer>
+
+</body>
+</html>
