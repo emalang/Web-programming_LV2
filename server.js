@@ -5,10 +5,10 @@ const app = express(); // Inicijalizacija Express aplikacije
 const PORT = process.env.PORT || 3000; // Postavljanje porta na kojem će server slušati
 
 // Poslužuje sve statičke datoteke iz mape public
-app.use(express.static(path.join(__dirname, 'Web-programming_LV2', 'public')));
+app.use(express.static(path.join(__dirname,  'public')));
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname,'Web-programming_LV2', 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.listen(PORT, () => {
