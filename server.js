@@ -19,13 +19,13 @@ app.get('/slike', (req, res) => {
   const files=fs.readdirSync(folderPath); // Čitanje svih datoteka u mapi images
 
   const images = files
-    .filter(file =>
+    /*.filter(file =>
       file.endsWith('.jpg') ||
       file.endsWith('.jpeg') ||
       file.endsWith('.png') ||
       file.endsWith('.svg') ||
       file.endsWith('.webp')
-    )
+    )*/
     .map((file, index) => ({
       url: `/images/${file}`,
       id: `slika${index + 1}`,

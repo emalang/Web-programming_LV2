@@ -53,11 +53,11 @@ header {
 }
 
 :root{
-     --drama: #3498db;
-    --komedija: #2ecc71;
-    --akcija: #f1c40f;
-    --ostalo: #e74c3c;
-    --chart-size: 180px;
+    --drama: #6c8ead;     
+    --komedija: #7dbb91;  
+    --akcija: #f2c572;    
+    --ostalo: #d98c8c;    
+    --chart-size: 280px;
 }
 
 .chart-wrapper{
@@ -86,7 +86,9 @@ header {
         var(--ostalo) 63.1% 100%
     );
     margin: 0 auto;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.12);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 8px solid white;
 }
 
 .pie-visual:hover {
@@ -99,11 +101,6 @@ header {
     padding:0;
     margin:0;
     text-align: left;
-}
-
-.pie-chart li {
-    margin: 10px 0;
-    font-size: 16px;
 }
 
 .pie-chart li {
