@@ -7,7 +7,6 @@ const PORT = process.env.PORT || 3000; // Postavljanje porta na kojem će server
 
 // Poslužuje sve statičke datoteke iz mape public
 app.use(express.static(path.join(__dirname,  'public')));
-
 app.set('view engine', 'ejs'); // Postavljanje EJS kao templating enginea
 app.set('views', path.join(__dirname, 'views')); // Postavljanje direktorija za EJS predloške
 
