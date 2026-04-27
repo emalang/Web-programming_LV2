@@ -1,4 +1,5 @@
 let sviFilmovi = [];
+let kosarica = [];
 
 fetch('/movies.csv')
     .then(res => res.text())
@@ -50,6 +51,11 @@ function prikaziPocetneFilmove(filmovi) {
     const tbody = document.querySelector('#filmovi-tablica tbody');
     tbody.innerHTML = '';
 
+    if (filmovi.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7">Nema filmova za odabrane filtre.</td></tr>';
+        return;
+    }
+
     for (const film of filmovi) {
         const row = document.createElement('tr');
 
@@ -60,7 +66,12 @@ function prikaziPocetneFilmove(filmovi) {
             <td>${film.duration} min</td>
             <td>${film.country}</td>
             <td>${film.avg_vote}</td>
+            <td><button class="dodaj-btn">Dodaj</button></td>
         `;
+
+        row.querySelector('.dodaj-btn').addEventListener('click', () => {
+            dodajUKosaricu(film);
+        });
 
         tbody.appendChild(row);
     }
@@ -118,3 +129,64 @@ function prikaziFiltriraneFilmove(filmovi) {
         tbody.appendChild(row);
     }
 }
+
+if (filtriraniFilmovi.length === 0) {
+    const tbody = document.querySelector('#filmovi-tablica tbody');
+    tbody.innerHTML = '<tr><td colspan="6">Nema filmova za odabrane filtre.</td></tr>';
+    return;
+}
+
+function dodajUKosaricu(film) {
+    const vecPostoji = kosarica.some(item => item.title === film.title);
+
+    if (vecPostoji) {
+        alert('Film je već u košarici!');
+        return;
+    }
+
+    kosarica.push(film);
+    osvjeziKosaricu();
+}
+
+function osvjeziKosaricu() {
+    const lista = document.getElementById('lista-kosarice');
+    const brojFilmova = document.getElementById('broj-filmova');
+
+    lista.innerHTML = '';
+    brojFilmova.textContent = kosarica.length;
+
+    kosarica.forEach((film, index) => {
+        const li = document.createElement('li');
+
+        li.innerHTML = `
+            <strong>${film.title}</strong><br>
+            ${film.year} | ${film.genre}
+        `;
+
+        const ukloniBtn = document.createElement('button');
+        ukloniBtn.textContent = 'Ukloni';
+        ukloniBtn.addEventListener('click', () => {
+            ukloniIzKosarice(index);
+        });
+
+        li.appendChild(ukloniBtn);
+        lista.appendChild(li);
+    });
+}
+
+function ukloniIzKosarice(index) {
+    kosarica.splice(index, 1);
+    osvjeziKosaricu();
+}
+
+document.getElementById('potvrdi-kosaricu').addEventListener('click', () => {
+    if (kosarica.length === 0) {
+        alert('Košarica je prazna!');
+        return;
+    }
+
+    alert(`Uspješno ste dodali ${kosarica.length} filmova u svoju košaricu za vikend maraton!`);
+
+    kosarica = [];
+    osvjeziKosaricu();
+});

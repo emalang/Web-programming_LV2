@@ -368,3 +368,66 @@ tr:nth-child(even){
         width: 100%;
     }
 }
+
+#filteri {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    padding: 18px;
+    margin: 20px auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+#filteri select,
+#filteri input {
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+#primijeni-filtere,
+.dodaj-btn,
+#potvrdi-kosaricu,
+#lista-kosarice button {
+    background: #222;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+#primijeni-filtere:hover,
+.dodaj-btn:hover,
+#potvrdi-kosaricu:hover,
+#lista-kosarice button:hover {
+    background: #444;
+}
+
+#kosarica {
+    margin-top: 20px;
+    background: #f4f4f4;
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 12px;
+}
+
+#lista-kosarice {
+    list-style: none;
+    padding: 0;
+}
+
+#lista-kosarice li {
+    background: white;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+#lista-kosarice button {
+    margin-top: 8px;
+}
