@@ -88,7 +88,7 @@ function filtriraj() {
         return zanrMatch && godinaMatch && drzavaMatch && ocjenaMatch;
     });
 
-    prikaziFiltriraneFilmove(filtriraniFilmovi);
+    prikaziPocetneFilmove(filtriraniFilmovi);
 }
 
 document.getElementById('primijeni-filtere').addEventListener('click', filtriraj);
