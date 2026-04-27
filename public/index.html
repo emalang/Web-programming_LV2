@@ -7,6 +7,7 @@
 		<meta name="description" content="Web stranica o filmovima, sa popisom i galerijom">
 		<!--dodati link za css dokumente -->
 		  <link rel="stylesheet" href="/styles/style.css">
+		  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 		<title>Popis filmova</title> <!--promijeniti odgovarajući tekst na stranici
 		ovo je samo predložak-->
 	</head>
@@ -30,8 +31,23 @@
 		<main>
 			<div class="content-layout">
 				<section aria-labelledby="movie-table">
-					<h2 id="mobvie-table">Tablica s filmovima</h2>
+					<h2 id="movie-table">Tablica s filmovima</h2>
 
+					<table id="filmovi-tablica">
+						<thead>
+							<tr>
+								<th>Naslov</th>
+								<th>Godina</th>
+								<th>Žanr</th>
+								<th>Trajanje</th>
+								<th>Država</th>
+								<th>Ocjena</th>
+        					</tr>
+    					</thead>
+    					<tbody>
+    					</tbody>
+					</table>
+					<!---
 					<table>
 						<thead>
 							<tr>
@@ -67,6 +83,7 @@
 							<tr><td>51</td><td>Some Like It Hot</td><td>1959</td><td>Komedija</td><td>120</td><td>SAD</td><td>9.1</td></tr>
 						</tbody>				
 					</table>
+				-->
 				</section>
 
 				<aside>
@@ -100,4 +117,5 @@
 		<p>&copy; 2025. Web Programiranje. Sva prava pridrzana.</p>
 		</footer>
 	</body>
+	<script src="script.js"></script>
 	</html>
