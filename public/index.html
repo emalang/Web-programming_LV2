@@ -38,23 +38,34 @@
 					 <!-- FILTRI -->
 					<div id="filteri">
 						<select id="filter-genre">
-							<option value="">-- Odaberi zanr --</option>
+							<option value="">Sve</option>
+							<option value="Action">Action</option>
+							<option value="Adventure">Adventure</option>
+							<option value="Animation">Animation</option>
+							<option value="Biography">Biography</option>
 							<option value="Comedy">Comedy</option>
+							<option value="Crime">Crime</option>
 							<option value="Drama">Drama</option>
-						</select>
+							<option value="Horror">Horror</option>
+							<option value="Mystery">Mystery</option>
+							<option value="Sci-Fi">Sci-Fi</option>
+							<option value="Thriller">Thriller</option>
+							<option value="War">War</option>
+							<option value="Western">Western</option>
+    					</select>
 
-        				<input type="number" id="filter-year-from" placeholder="Godina od">
+        				<input type="number" id="filter-year-from" placeholder="Godina od" min="1954" max="2019">
 
-						<select id="filter-country">
-							<option value="">-- Odaberi drzavu --</option>
-							<option value="United States">United States</option>
-							<option value="Italy">Italy</option>
-						</select>
+						<div class="filter-rating-group">
+							<label for="filter-rating">Minimalna ocjena:</label>
+							<input type="range" id="filter-rating" min="8.5" max="9.3" step="0.1" value="8.5">
+							<span id="rating-value">8.5</span>
+						</div>
 
-						<input type="range" id="filter-rating" min="0" max="10" step="0.1" value="7">
-						<span id="rating-value">7.0</span>
+						<div class="filter-row">
+							<button id="primijeni-filtere">Filtriraj</button>
+						</div>
 
-						<button id="primijeni-filtere">Filtriraj</button>
 					</div>
 
 					<table id="filmovi-tablica">
@@ -66,11 +77,28 @@
 								<th>Trajanje</th>
 								<th>Država</th>
 								<th>Ocjena</th>
-								<th>Odabir</th>
         					</tr>
     					</thead>
     					<tbody>
     					</tbody>
+					</table>
+
+					<h2>Filtrirani rezultati</h2>
+
+					<table id="filtriranje_tablica">
+						<thead>
+							<tr>
+								<th>Naslov</th>
+								<th>Godina</th>
+								<th>Žanr</th>
+								<th>Trajanje</th>
+								<th>Država</th>
+								<th>Ocjena</th>
+								<th>Odabir</th>
+							</tr>
+						</thead>
+						<tbody>
+						</tbody>
 					</table>
 
 					<!---
@@ -145,6 +173,7 @@
 
 						<button id="potvrdi-kosaricu">Potvrdi posudbu</button>
 					</div>
+				
 				</aside>
 			</div>
 

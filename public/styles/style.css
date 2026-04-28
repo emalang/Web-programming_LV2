@@ -391,14 +391,41 @@ tr:nth-child(even){
 
 #primijeni-filtere,
 .dodaj-btn,
-#potvrdi-kosaricu,
 #lista-kosarice button {
     background: #222;
     color: white;
     border: none;
     border-radius: 8px;
-    padding: 8px 12px;
+    padding: 6px 10px;
     cursor: pointer;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.filter-rating-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.filter-row {
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center; 
+}
+
+#potvrdi-kosaricu{
+     background: #222;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 10px;
+    cursor: pointer;
+    text-align: center;
+
 }
 
 #primijeni-filtere:hover,

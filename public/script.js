@@ -18,16 +18,17 @@ fetch('/movies.csv')
             avg_vote: Number(film.Ocjena)
         }));
 
+        // početna tablica
         prikaziPocetneFilmove(sviFilmovi.slice(0, 20));
-        prikaziFiltriraneFilmove([]);
 
-        //prikaziTablicu(filmovi.slice(0, 150));
+        // prazna filtrirana tablica
+        prikaziFiltriraneFilmove([]);
     })
     .catch(err => {
         console.error('Greška pri dohvaćanju CSV-a:', err);
     });
 
-/*function prikaziTablicu(filmovi) {
+function prikaziPocetneFilmove(filmovi) {
     const tbody = document.querySelector('#filmovi-tablica tbody');
     tbody.innerHTML = '';
 
@@ -38,17 +39,17 @@ fetch('/movies.csv')
             <td>${film.title}</td>
             <td>${film.year}</td>
             <td>${film.genre}</td>
-            <td>${film.duration}</td>
+            <td>${film.duration} min</td>
             <td>${film.country}</td>
-            <td>${film.rating}</td>
+            <td>${film.avg_vote}</td>
         `;
 
         tbody.appendChild(row);
     }
-}?*/
+}
 
-function prikaziPocetneFilmove(filmovi) {
-    const tbody = document.querySelector('#filmovi-tablica tbody');
+function prikaziFiltriraneFilmove(filmovi) {
+    const tbody = document.querySelector('#filtriranje_tablica tbody');
     tbody.innerHTML = '';
 
     if (filmovi.length === 0) {
@@ -81,63 +82,30 @@ const rangeInput = document.getElementById('filter-rating');
 const ratingDisplay = document.getElementById('rating-value');
 
 rangeInput.addEventListener('input', () => {
-        ratingDisplay.textContent = rangeInput.value;
+    ratingDisplay.textContent = rangeInput.value;
 });
 
 function filtriraj() {
     const zanr = document.getElementById('filter-genre').value.trim().toLowerCase();
     const godinaOd = parseInt(document.getElementById('filter-year-from').value);
-    const drzava = document.getElementById('filter-country').value.trim().toLowerCase();
     const ocjena = parseFloat(document.getElementById('filter-rating').value);
 
     const filtriraniFilmovi = sviFilmovi.filter(film => {
         const zanrMatch = !zanr || film.genre.toLowerCase().includes(zanr);
         const godinaMatch = !godinaOd || film.year >= godinaOd;
-        const drzavaMatch = !drzava || film.country.toLowerCase().includes(drzava);
         const ocjenaMatch = film.avg_vote >= ocjena;
 
-        return zanrMatch && godinaMatch && drzavaMatch && ocjenaMatch;
+        return zanrMatch && godinaMatch && ocjenaMatch;
     });
 
-    prikaziPocetneFilmove(filtriraniFilmovi);
+    prikaziFiltriraneFilmove(filtriraniFilmovi);
 }
 
-document.getElementById('primijeni-filtere').addEventListener('click', filtriraj);
-
-function prikaziFiltriraneFilmove(filmovi) {
-    const tbody = document.querySelector('#filtriranje_tablica tbody');
-
-    tbody.innerHTML = '';
-
-    if (filmovi.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6">Nema filmova za odabrane filtre.</td></tr>';
-        return;
-    }
-
-    for (const film of filmovi) {
-        const row = document.createElement('tr');
-
-        row.innerHTML = `
-            <td>${film.title}</td>
-            <td>${film.year}</td>
-            <td>${film.genre}</td>
-            <td>${film.duration} min</td>
-            <td>${Array.isArray(film.country) ? film.country.join(', ') : film.country}</td>
-            <td>${film.avg_vote}</td>
-        `;
-
-        tbody.appendChild(row);
-    }
-}
-
-if (filtriraniFilmovi.length === 0) {
-    const tbody = document.querySelector('#filmovi-tablica tbody');
-    tbody.innerHTML = '<tr><td colspan="6">Nema filmova za odabrane filtre.</td></tr>';
-    return;
-}
+document.getElementById('primijeni-filtere')
+    .addEventListener('click', filtriraj);
 
 function dodajUKosaricu(film) {
-    const vecPostoji = kosarica.some(item => item.title === film.title);
+    const vecPostoji = kosarica.some(f => f.title === film.title);
 
     if (vecPostoji) {
         alert('Film je već u košarici!');
@@ -150,10 +118,10 @@ function dodajUKosaricu(film) {
 
 function osvjeziKosaricu() {
     const lista = document.getElementById('lista-kosarice');
-    const brojFilmova = document.getElementById('broj-filmova');
+    const broj = document.getElementById('broj-filmova');
 
     lista.innerHTML = '';
-    brojFilmova.textContent = kosarica.length;
+    broj.textContent = kosarica.length;
 
     kosarica.forEach((film, index) => {
         const li = document.createElement('li');
@@ -163,30 +131,28 @@ function osvjeziKosaricu() {
             ${film.year} | ${film.genre}
         `;
 
-        const ukloniBtn = document.createElement('button');
-        ukloniBtn.textContent = 'Ukloni';
-        ukloniBtn.addEventListener('click', () => {
-            ukloniIzKosarice(index);
+        const btn = document.createElement('button');
+        btn.textContent = 'Ukloni';
+
+        btn.addEventListener('click', () => {
+            kosarica.splice(index, 1);
+            osvjeziKosaricu();
         });
 
-        li.appendChild(ukloniBtn);
+        li.appendChild(btn);
         lista.appendChild(li);
     });
 }
 
-function ukloniIzKosarice(index) {
-    kosarica.splice(index, 1);
-    osvjeziKosaricu();
-}
+document.getElementById('potvrdi-kosaricu')
+    .addEventListener('click', () => {
+        if (kosarica.length === 0) {
+            alert('Košarica je prazna!');
+            return;
+        }
 
-document.getElementById('potvrdi-kosaricu').addEventListener('click', () => {
-    if (kosarica.length === 0) {
-        alert('Košarica je prazna!');
-        return;
-    }
+        alert(`Uspješno ste dodali ${kosarica.length} filmova!`);
 
-    alert(`Uspješno ste dodali ${kosarica.length} filmova u svoju košaricu za vikend maraton!`);
-
-    kosarica = [];
-    osvjeziKosaricu();
-});
+        kosarica = [];
+        osvjeziKosaricu();
+    });
